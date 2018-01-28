@@ -5,8 +5,8 @@
 #include <cstdlib>
 using namespace std;
 int N;
-
-void print_mat(int *mat) {
+// print function to write on stdout. used for debugging.
+/*void print_mat(int *mat) {
 	int i, j; 
 	for (i = 0; i < N; i++) {
 		for (j = 0; j < N; j++) {
@@ -15,7 +15,7 @@ void print_mat(int *mat) {
 		}
 		printf("\n");
 	}
-}
+}*/
 
 int *Multiply(int *mat1, int *mat2, int count) {
 	int *sol; int i, j, k;
@@ -89,7 +89,9 @@ int main(int argc, char *argv[]) {
 		double time_spent = (double) (end - begin)/CLOCKS_PER_SEC;
 		printf("WAY_NO : %d TIME = %lf\n",count, time_spent);
 	}
-/*	fp = fopen(argv[3], "w+");
+
+//if you want to get outputed answer on argument 5 provided in command line.
+/*	fp = fopen(argv[4], "w+");
 	for (i = 0; i < N; i++) {
 		for (j = 0; j < N; j++) {
 			fprintf(fp, "%d\t\t ", *(ans_mat + i * N + j));
@@ -97,5 +99,6 @@ int main(int argc, char *argv[]) {
 		fprintf(fp, "\n");
 	}
 	fclose(fp);*/
+
 	return 0;
 }
