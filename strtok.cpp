@@ -29,28 +29,62 @@ int *Multiply(int *mat1, int *mat2, int count) {
 			*(sol + (i * N) + j) = 0;
 		}
 	}
-	for (i = 0; i < N; i++) {
-		for (j = 0; j < N; j++) {
-			for (k = 0; k < N; k++) {
-				switch(count) {
-				case 1 : 
-					*(sol + i * N + j) += (*(mat1 + k * N + i)) * (*(mat2 + j * N + k));
-				case 2 :
-					*(sol + i * N + k) += (*(mat1 + j * N + i)) * (*(mat2 + k * N + j));
-				case 3 :
-					*(sol + j * N + i) += (*(mat1 + k * N + j)) * (*(mat2 + i * N + k));
-				case 4 :
-					*(sol + j * N + k) += (*(mat1 + i * N + j)) * (*(mat2 + k * N + i));
-				case 5 :
-					*(sol + k * N + j) += (*(mat1 + i * N + k)) * (*(mat2 + j * N + i));
-				case 6 :
-					*(sol + k * N + i) += (*(mat1 + j * N + k)) * (*(mat2 + i * N + j));
-				} 
-			
+	switch(count) {
+		case 1 :
+			for (i = 0; i < N; i++) {
+				for (j = 0; j < N; j++) {
+					for (k = 0; k < N; k++) {
+						*(sol + i * N + j) += *(mat1 + i * N + k) * *(mat2 + k * N + j); 				
+					}
+				}
 			}
-		}
+			return sol;
+		case 2 :
+			for (i = 0; i < N; i++) {
+				for (k = 0; k < N; k++) {
+					for (j = 0; j < N; j++) {
+						*(sol + i * N + j) += *(mat1 + i * N + k) * *(mat2 + k * N + j); 				
+					}
+				}
+			}
+			return sol;
+		case 3 :
+			for (j= 0; j < N; j++) {
+				for (i = 0; i < N; i++) {
+					for (k = 0; k < N; k++) {
+						*(sol + i * N + j) += *(mat1 + i * N + k) * *(mat2 + k * N + j); 				
+					}
+				}
+			}
+			return sol;
+		case 4 :
+			for (j = 0; j < N; j++) {
+				for (k = 0; k < N; k++) {
+					for (i = 0; i < N; i++) {
+						*(sol + i * N + j) += *(mat1 + i * N + k) * *(mat2 + k * N + j); 				
+					}
+				}
+			}
+			return sol;
+		case 5 :
+			for (k = 0; k < N; k++) {
+				for (i = 0; i < N; i++) {
+					for (j = 0; j < N; j++) {
+						*(sol + i * N + j) += *(mat1 + i * N + k) * *(mat2 + k * N + j); 				
+					}
+				}
+			}
+			return sol;
+		case 6 :
+			for (k = 0; k < N; k++) {
+				for (j = 0; j < N; j++) {
+					for (i = 0; i < N; i++) {
+						*(sol + i * N + j) += *(mat1 + i * N + k) * *(mat2 + k * N + j); 				
+					}
+				}
+			}
+			return sol;
 	}
-	return sol;
 } 
 int main(int argc, char *argv[]) {
 	if (argc != 5) {
@@ -84,10 +118,11 @@ int main(int argc, char *argv[]) {
 	int count;
 	for (count = 1; count < 7; count++) {
 		clock_t begin = clock();
-		ans_mat = Multiply( mat1, mat2, 1);
+		ans_mat = Multiply( mat1, mat2, count);
 		clock_t end = clock();
 		double time_spent = (double) (end - begin)/CLOCKS_PER_SEC;
 		printf("WAY_NO : %d TIME = %lf\n",count, time_spent);
+		free(ans_mat);
 	}
 
 //if you want to get outputed answer on argument 5 provided in command line.
